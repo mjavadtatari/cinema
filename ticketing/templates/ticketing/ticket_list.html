@@ -1,0 +1,65 @@
+{% extends 'ticketing/base_page.html' %}
+
+{% block page_title %}
+    لیست بلیت های من
+{% endblock %}
+
+{% block page_content %}
+    {% if tickets %}
+        {% for ticket in tickets %}
+            <div class="col-4">
+                <div class="card mb-3 m-2">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url "ticketing:ticket_details" ticket_id=ticket.pk %}">
+                                {{ ticket.showtime.movie.name }}
+                            </a>
+                        </h5>
+                        <p class="card-text">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">
+                                    مکان
+                                </th>
+                                <th scope="col">
+                                    <a href="{% url "ticketing:cinema_details" cinema_id=ticket.showtime.cinema_id %}">
+                                        {{ ticket.showtime.cinema.name }}
+                                    </a>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">
+                                    سانس
+                                </th>
+                                <td><a href="{% url 'ticketing:showtime_details' showtime_id=ticket.showtime_id %}">
+                            {{ ticket.showtime.start_time }}
+                        </a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    تعداد
+                                </th>
+                                <td>{{ ticket.seat_counter }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    تاریخ خرید
+                                </th>
+                                <td>{{ ticket.order_time }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12 alert alert-danger" role="alert">
+            متاسفانه بلیتی برای شما ثبت نشده است!
+        </div>
+    {% endif %}
+{% endblock %}

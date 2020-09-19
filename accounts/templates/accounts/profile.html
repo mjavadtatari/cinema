@@ -1,0 +1,93 @@
+{% extends 'ticketing/base_page.html' %}
+
+{% block page_title %}
+    پنل کاربری
+{% endblock %}
+
+{% block page_content %}
+    <div class="col-2"></div>
+    <div class="col-8 ">
+        <div class="row my-5 p-4 bg-dark rounded">
+            <div class="col-8 bg-light">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" colspan="2" class="text-center">
+                            به نمایه کاربری خودتون خوش آمدید
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">
+                            نام و نام خانوادگی:
+                        </th>
+                        <td>{{ profile.user.get_full_name }}</td>
+                    </tr><tr>
+                        <th scope="row">
+                            تلفن همراه:
+                        </th>
+                        <td>{{ profile.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            ایمیل:
+                        </th>
+                        <td>{{ profile.user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            جنسیت:
+                        </th>
+                        <td>{{ profile.get_gender_display }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            تاریخ تولد:
+                        </th>
+                        <td>{{ profile.birth_date }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            اعتبار:
+                        </th>
+                        <td>{{ profile.get_balance_display }}
+                        <button type="button" class="btn btn-success">
+                            افزایش اعتبار
+                        </button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            آدرس:
+                        </th>
+                        <td>{{ profile.address }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4 bg-light py-4 text-center">
+                {% if profile.profile_image %}
+                    <img style="width: 210px" src="{{ profile.profile_image.url }}"
+                     alt="{{ profile.user.get_full_name }}"></td>
+                {% else %}
+                    <i class="fas fa-user fa-10x"></i>
+                {% endif %}
+                <div class="btn-group-vertical mt-4 btn-block" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-success" href="{% url "ticketing:ticket_list" %}">
+                        بلیت های من
+                    </a>
+                    <button type="button" class="btn btn-warning">
+                        تغییر نمایه
+                    </button>
+                    <button type="button" class="btn btn-info">
+                        تغییر آدرس
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        تغییر گذرواژه
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-2"></div>
+{% endblock %}

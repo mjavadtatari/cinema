@@ -1,0 +1,62 @@
+{% extends 'ticketing/base_page.html' %}
+
+{% block page_title %}
+    سانس های نمایش
+{% endblock %}
+
+{% block page_content %}
+    <div class="col-12 py-4">
+        <form action="" method="get">
+            <div class="form-group row">
+                {{ search_form.as_p }}
+                <button type="submit" class="btn btn-primary">جست و جو</button>
+            </div>
+        </form>
+        {% if showtime %}
+            <div class="alert alert-info">
+                {{ showtime.count }}
+                سانس یافت شد!
+            </div>
+        {% else %}
+            <div class="alert alert-danger">
+                سانسی با این مشخصات یافت نشد!
+            </div>
+        {% endif %}
+    </div>
+    {% for show in showtime %}
+        <div class="col-3">
+            {% if show.status ==  2 %}
+                <a href="{% url "ticketing:showtime_details" showtime_id=show.pk %}"
+                   class="btn btn-success p-4 m-2 btn-block">
+            {% else %}
+                <a href="{% url "ticketing:showtime_details" showtime_id=show.pk %}"
+                   class="btn btn-secondary p-4 m-2 btn-block disabled">
+            {% endif %}
+            <span>
+                    {{ show.movie }}
+                </span><br/>
+            <span class="badge badge-light">
+                    {{ show.cinema }}
+                </span><br/>
+            <span class="badge badge-danger">
+                    سانس
+                    {{ show.start_time |date:"Y/n/j" }}
+                </span><br/>
+            {% if show.status ==  2 %}
+                <span class="badge badge-pill badge-warning">
+                        {{ show.get_status_display }}
+                    </span><br/>
+                <span>
+                        {{ show.get_price_display }}
+                    </span>
+            {% else %}
+                <span class="badge badge-pill badge-danger">
+                        {{ show.get_status_display }}
+                    </span>
+            {% endif %}
+            </a>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "ticketing/base_page.html" %}
+
+{% block page_title %}
+    بلیت سانس
+    {{ showtime.start_time |date:"y/n/j" }}
+    برای فیلم
+    {{ showtime.movie.name }}
+{% endblock %}
+
+
+{% block page_content %}
+    <div class="col-2"></div>
+    <div class="col-8 ">
+        <div class="row my-5 p-4 bg-dark rounded">
+            <div class="col-8 bg-light">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" colspan="2" class="text-center">
+                            خرید بلیت سانس
+                            {{ showtime.start_time |date:"Y/n/j" }}
+                            برای فیلم
+                            {{ showtime.movie.name }}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">
+                            نام فیلم:
+                        </th>
+                        <td><a href="{% url "ticketing:movie_details" movie_id=showtime.movie_id %}">
+                            {{ showtime.movie.name }}
+                        </a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            نام سینما:
+                        </th>
+                        <td><a href="{% url "ticketing:cinema_details" cinema_id=showtime.cinema_id %}">
+                            {{ showtime.cinema.name }}
+                        </a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            نام و نام خانوادگی شما:
+                        </th>
+                        <td>
+                            {{ profile.user.get_full_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            ساعت شروع سانس:
+                        </th>
+                        <td>
+                            {{ showtime.start_time|date:"H:i" }}
+                        </td>
+                    </tr>
+                    {% if showtime.status == 2 %}
+                        <tr class="alert alert-success">
+                            {% else %}
+                        <tr class="alert alert-danger">
+                    {% endif %}
+                    <th scope="row">
+                        وضعیت سانس:
+                    </th>
+                    <td>
+                        {{ showtime.get_status_display }}
+                    </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            ظرفیت خالی:
+                        </th>
+                        <td>
+                            {{ showtime.free_seats }}
+                            صندلی
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            قیمت هر صندلی:
+                        </th>
+                        <td>
+                            {{ showtime.price }}
+                            تومان
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            موجودی کیف پول شما:
+                        </th>
+                        <td>
+                            {{ profile.get_balance_display }}
+                        </td>
+                    </tr>
+                    {% if showtime.status == 2 %}
+                        <tr>
+                            <th scope="row">
+                                انتخاب تعداد بلیت:
+                            </th>
+                            <td>
+                                <form action="" method="post" class="form-row">
+                                    {% csrf_token %}
+                                    <div class="col">
+                                        <select name="seat_count" class="form-control">
+                                            {% for sale in salable_list %}
+                                                <option value="{{ sale }}">{{ sale }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-success btn-block">
+                                            خرید
+                                        </button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+
+                    {% if error %}
+                        <tr class="bg-danger text-light">
+                            <th scope="row">
+                                خطا:
+                            </th>
+                            <td>
+                                {{ error }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4 bg-light py-5">
+                <img src="{{ showtime.movie.poster.url }}" class="card-img"
+                     alt="{{ showtime.movie.name }}">
+            </div>
+        </div>
+    </div>
+    <div class="col-2"></div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'ticketing/base_page.html' %}
+
+{% block page_title %}
+    ورود کاربران
+{% endblock %}
+
+{% block page_content %}
+    <form action="" method="post" class="mx-auto my-5 p-3 bg-light">
+        {% csrf_token %}
+        <div class="row px-2">
+            {% if error %}
+                <div class="col alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="row p-3">
+            <div class="col-auto">
+                <input type="text" class="form-control" name="username" value="{{ username }}" placeholder="نام کاربری"
+                       required>
+            </div>
+            <div class="col-auto">
+                <input type="password" class="form-control" name="password" placeholder="رمز عبور" required>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">ورود</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

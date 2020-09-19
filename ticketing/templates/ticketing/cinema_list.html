@@ -1,0 +1,30 @@
+{% extends 'ticketing/base_page.html' %}
+
+{% block page_title %}
+    لیست سینما ها
+{% endblock %}
+
+{% block page_content %}
+    {% if cinema_list %}
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    لیست سینما های فعال:
+                </th>
+            </tr>
+        </thead>
+        {% for cinema in cinema_list %}
+            <tr>
+                <td>
+                    <a class="btn btn-outline-info btn-lg btn-block" href="{% url "ticketing:cinema_details" cinema_id=cinema.pk %}">{{ cinema }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p style="color: red">
+        سینمایی موجود نیست
+        </p>
+    {% endif %}
+{% endblock %}

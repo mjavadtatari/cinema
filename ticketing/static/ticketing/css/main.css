@@ -1,0 +1,92 @@
+@font-face {
+  font-family: 'Sahel-Black';
+  src: url('/static/ticketing/webfonts/Sahel-Black-FD.eot'); /* IE9 Compat Modes */
+  src: url('/static/ticketing/webfonts/Sahel-Black-FD.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       /*url('webfont.woff2') format('woff2'), !* Super Modern Browsers *!*/
+       url('/static/ticketing/webfonts/Sahel-Black-FD.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/static/ticketing/webfonts/Sahel-Black-FD.ttf')  format('truetype') /* Safari, Android, iOS */
+       /*url('webfont.svg#svgFontName') format('svg'); !* Legacy iOS *!*/
+}
+@font-face {
+  font-family: 'Sahel-Bold';
+  src: url('/static/ticketing/webfonts/Sahel-Bold-FD.eot'); /* IE9 Compat Modes */
+  src: url('/static/ticketing/webfonts/Sahel-Bold-FD.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       /*url('webfont.woff2') format('woff2'), !* Super Modern Browsers *!*/
+       url('/static/ticketing/webfonts/Sahel-Bold-FD.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/static/ticketing/webfonts/Sahel-Bold-FD.ttf')  format('truetype') /* Safari, Android, iOS */
+       /*url('webfont.svg#svgFontName') format('svg'); !* Legacy iOS *!*/
+}
+@font-face {
+  font-family: 'Sahel';
+  src: url('/static/ticketing/webfonts/Sahel-FD.eot'); /* IE9 Compat Modes */
+  src: url('/static/ticketing/webfonts/Sahel-FD.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       /*url('webfont.woff2') format('woff2'), !* Super Modern Browsers *!*/
+       url('/static/ticketing/webfonts/Sahel-FD.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/static/ticketing/webfonts/Sahel-FD.ttf')  format('truetype') /* Safari, Android, iOS */
+       /*url('webfont.svg#svgFontName') format('svg'); !* Legacy iOS *!*/
+}
+
+html,body{
+    direction: rtl;
+    text-align: right !important;
+}
+
+h1{
+    font-family: "Sahel-Black";
+    margin: 0 auto;
+}
+h3{
+    font-family: "Sahel-Bold";
+}
+body{
+    font-family: Sahel;
+}
+/*table {*/
+/*  border-collapse: collapse;*/
+/*  width: 80%;*/
+/*}*/
+
+/*td, th {*/
+/*  border: 1px solid #dddddd;*/
+/*  text-align: justify-all;*/
+/*  padding: 8px;*/
+/*}*/
+
+/*tr:nth-child(even) {*/
+/*  background-color: #dddddd;*/
+/*}*/
+
+.advertisment{
+    font-family: Sahel-Black;
+    color: aliceblue;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+    width: auto;
+}
+
+.ads0{
+    background-color: cornflowerblue;
+}
+
+.ads1{
+    background-color: deepskyblue;
+}
+
+.ads2{
+    background-color: darkred;
+}
+
+.showtimebox{
+    margin: 10px;
+    display: inline-block;
+    width: 250px;
+    height: 150px;
+    background-color: lavender;
+    text-align: center;
+    text-decoration: none;
+    color: darkred;
+    font-family: Sahel-Bold;
+    padding: 10px;
+    border-radius: 5px;
+}

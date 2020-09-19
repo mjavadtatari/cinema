@@ -1,0 +1,12 @@
+{% extends 'ticketing/base_page.html' %}
+
+{% block page_title %}
+    سامانه فروش بلیت سینما
+{% endblock %}
+
+{% block page_content %}
+    {% include 'ticketing/_ads.html' %}
+    {% include "ticketing/_ads.html" with class_name='ads2' ads_name="samsung" %}
+    {% include "ticketing/_ads.html" with class_name='ads1' ads_name="digikala" %}
+    {% include "ticketing/_ads.html" with class_name='ads2' ads_name="divar" %}
+{% endblock %}

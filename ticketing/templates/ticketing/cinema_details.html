@@ -1,0 +1,71 @@
+{% extends 'ticketing/base_page.html' %}
+
+{% block page_title %}{{ cinema.name }}{% endblock %}
+
+{% block page_content %}
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">سینما:</th>
+                <th scope="col">{{ cinema.name }}</th>
+            </tr>
+        </thead>
+        <tr>
+            <th scope="row">شهر:</th>
+            <td>{{ cinema.city }}</td>
+        </tr>
+        <tr>
+            <th scope="row">ظرفیت:</th>
+            <td>{{ cinema.capacity }}</td>
+        </tr>
+        <tr>
+            <th scope="row">تلفن:</th>
+            <td>{{ cinema.phone_number }}</td>
+        </tr>
+        <tr>
+            <th scope="row">آدرس:</th>
+            <td>{{ cinema.address }}</td>
+        </tr>
+        {% if cinema.image %}
+            <tr>
+                <th scope="row">تصویر:</th>
+                <td><img style="width: 250px" src="{{ cinema.image.url }}" alt="{{ cinema.name }}"></td>
+            </tr>
+        {% endif %}
+        <tr>
+            <th scope="row">سانس های موجود:</th>
+            <td>
+                <div class="row p-2">
+                    {% for show in available_shows %}
+                        <div class="col-4">
+                            {% if show.status ==  2%}
+                                <a href="{% url "ticketing:showtime_details" showtime_id=show.pk %}" class="btn btn-success p-4 m-2 btn-block">
+                            {% else %}
+                                <a href="{% url "ticketing:showtime_details" showtime_id=show.pk %}" class="btn btn-secondary p-4 m-2 btn-block disabled">
+                            {% endif %}
+                                <span>
+                                    {{ show.movie }}
+                                </span><br/>
+                                <span class="badge badge-light">
+                                    {{ show.cinema }}
+                                </span><br/>
+                                {% if show.status ==  2%}
+                                    <span class="badge badge-pill badge-warning">
+                                        {{ show.get_status_display }}
+                                    </span><br/>
+                                    <span>
+                                        {{ show.get_price_display }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge badge-pill badge-danger">
+                                        {{ show.get_status_display }}
+                                    </span>
+                                {% endif %}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </td>
+            </tr>
+    </table>
+{% endblock %}
